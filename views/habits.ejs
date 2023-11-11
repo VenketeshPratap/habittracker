@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habit Tracker - Habits</title>
+</head>
+<body>
+  <h1>Your Habits</h1>
+  <ul>
+    <% habits.forEach(habit => { %>
+      <li>
+        <%= habit.name %> - Status: <%= habit.status %>
+        <form action="/update-status/<%= habit.id %>" method="post" style="display: inline;">
+          <select name="status" onchange="this.form.submit()">
+            <option value="Done" <%= habit.status === 'Done' ? 'selected' : '' %>>Done</option>
+            <option value="NotDone" <%= habit.status === 'NotDone' ? 'selected' : '' %>>Not Done</option>
+            <option value="None" <%= habit.status === 'None' ? 'selected' : '' %>>None</option>
+          </select>
+        </form>
+      </li>
+    <% }); %>
+  </ul>
+
+  <h2>Add a New Habit</h2>
+  <form action="/add-habit" method="post">
+    <label for="habitName">Habit Name:</label>
+    <input type="text" id="habitName" name="habitName" required>
+    <button type="submit">Add Habit</button>
+  </form>
+</body>
+</html>
+
+
